@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.ivianuu'
 
 android {
     compileSdkVersion 25
@@ -24,6 +27,9 @@ android {
 dependencies {
     // Android Support
     compile 'com.android.support:appcompat-v7:25.3.1'
+
+    // Annotation
+    compile project(':annotations')
 
     // Compile libs
     compile fileTree(dir: 'libs', include: ['*.jar'])
