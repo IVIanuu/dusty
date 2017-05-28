@@ -25,9 +25,6 @@ dependencies {
     // Android Support
     compile 'com.android.support:appcompat-v7:25.3.1'
 
-    // Annotation
-    compile project(':annotations')
-
     // Compile libs
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
