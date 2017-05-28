@@ -26,6 +26,7 @@ dependencies {
 
     // AutoClearedValues
     compile project(':library')
+    annotationProcessor project(':processor')
 
     // Compile libs
     compile fileTree(dir: 'libs', include: ['*.jar'])

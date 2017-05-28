@@ -28,9 +28,6 @@ dependencies {
     // Annotation
     compile project(':annotations')
 
-    // Processor
-    compile project(':processor')
-
     // Compile libs
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
