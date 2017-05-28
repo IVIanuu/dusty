@@ -19,7 +19,6 @@ public class UserFragment extends MyFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Dusty.setDebug(true);
         Dusty.register(this);
     }
 }
