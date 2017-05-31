@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.ivianuu'
+
+dependencies {
+    // Annotations
+    compile project(':dusty-annotations')
+
+    // Auto service
+    compileOnly 'com.google.auto.service:auto-service:1.0-rc2'
+
+    // Auto common
+    compile 'com.google.auto:auto-common:0.6'
+
+    // Java poet
+    compile 'com.squareup:javapoet:1.9.0'
+
+    // Compile libs
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

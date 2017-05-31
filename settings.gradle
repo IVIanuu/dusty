@@ -1,1 +1,1 @@
-include ':sample', ':library', ':processor'
+include ':dusty', ':dusty-processor', ':dusty-sample', ':dusty-annotations'

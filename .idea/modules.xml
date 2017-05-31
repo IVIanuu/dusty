@@ -3,9 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Dusty.iml" filepath="$PROJECT_DIR$/Dusty.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/processor/processor.iml" filepath="$PROJECT_DIR$/processor/processor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dusty/dusty.iml" filepath="$PROJECT_DIR$/dusty/dusty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dusty-annotations/dusty-annotations.iml" filepath="$PROJECT_DIR$/dusty-annotations/dusty-annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dusty-processor/dusty-processor.iml" filepath="$PROJECT_DIR$/dusty-processor/dusty-processor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dusty-sample/dusty-sample.iml" filepath="$PROJECT_DIR$/dusty-sample/dusty-sample.iml" />
     </modules>
   </component>
 </project>

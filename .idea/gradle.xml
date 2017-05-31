@@ -8,9 +8,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/library" />
-            <option value="$PROJECT_DIR$/processor" />
-            <option value="$PROJECT_DIR$/sample" />
+            <option value="$PROJECT_DIR$/dusty" />
+            <option value="$PROJECT_DIR$/dusty-annotations" />
+            <option value="$PROJECT_DIR$/dusty-processor" />
+            <option value="$PROJECT_DIR$/dusty-sample" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
