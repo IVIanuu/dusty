@@ -4,9 +4,6 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.ivianuu'
 
 dependencies {
-    // Annotation
-    compile project(':annotations')
-
     // Auto service
     compileOnly 'com.google.auto.service:auto-service:1.0-rc2'
 

@@ -1,7 +1,6 @@
 package com.ivianuu.dusty.processor;
 
 import com.google.auto.service.AutoService;
-import com.ivianuu.dusty.annotations.Clear;
 import com.squareup.javapoet.JavaFile;
 
 import java.io.IOException;
