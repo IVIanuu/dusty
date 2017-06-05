@@ -17,7 +17,7 @@ public class SampleFragment extends Fragment {
     @Clear
     String myString;
     @Clear
-    Integer myInter;
+    Integer myInteger;
     @Clear
     BaseAdapter myAdapter;
 
