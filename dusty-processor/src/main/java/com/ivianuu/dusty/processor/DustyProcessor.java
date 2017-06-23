@@ -63,16 +63,11 @@ public class DustyProcessor extends AbstractProcessor {
     private static final String SUPPORT_FRAGMENT_TYPE = "android.support.v4.app.Fragment";
 
     private Filer filer;
-    private Types typeUtil;
-    private Elements elementUtil;
 
     @Override
     public synchronized void init(ProcessingEnvironment environment) {
         super.init(environment);
-
         filer = environment.getFiler();
-        typeUtil = environment.getTypeUtils();
-        elementUtil = environment.getElementUtils();
     }
 
     @Override
@@ -87,9 +82,7 @@ public class DustyProcessor extends AbstractProcessor {
 
     private Set<Class<? extends Annotation>> getSupportedAnnotations() {
         Set<Class<? extends Annotation>> annotations = new LinkedHashSet<>();
-
         annotations.add(Clear.class);
-
         return annotations;
     }
 
@@ -167,15 +160,18 @@ public class DustyProcessor extends AbstractProcessor {
         TypeElement enclosingElement = (TypeElement) element.getEnclosingElement();
 
         // Start by verifying common generated code restrictions.
-        boolean hasError = isInaccessibleViaGeneratedCode(Clear.class, "fields", element)
-                || isInWrongPackage(Clear.class, element)
-                || !isSupportFragment(enclosingElement.asType());
-
-        Name simpleName = element.getSimpleName();
-
-        if (hasError) {
-            error(enclosingElement, "annotated element must be in a support fragment and cannot be a interface or primitive");
+        if (isInaccessibleViaGeneratedCode(Clear.class, "fields", element)) {
+            error(element, "annotated element needs to be atleast package private and cannot be static or final ");
             return;
+        }
+
+        if (!isSupportFragment(enclosingElement.asType())) {
+            error(element, "annotated element needs to be inside a support fragment");
+            return;
+        }
+
+        if (isPrimitive(element.asType())) {
+            error(element, "annotated element cannot be a primitive type");
         }
 
         // Assemble information on the field.
@@ -184,7 +180,7 @@ public class DustyProcessor extends AbstractProcessor {
             builder = getOrCreateBindingBuilder(builderMap, enclosingElement);
         }
 
-        String name = simpleName.toString();
+        String name = element.getSimpleName().toString();
 
         builder.addFieldClearing(new FieldClearing(name));
 
@@ -276,18 +272,12 @@ public class DustyProcessor extends AbstractProcessor {
         return false;
     }
 
-    private boolean isSerializable(TypeMirror typeMirror) {
-        TypeMirror serializable = elementUtil.getTypeElement("java.io.Serializable").asType();
-        return typeUtil.isAssignable(typeMirror, serializable);
-    }
-
-    private boolean isInterface(TypeMirror typeMirror) {
-        return typeMirror instanceof DeclaredType
-                && ((DeclaredType) typeMirror).asElement().getKind() == INTERFACE;
-    }
-
     private boolean isSupportFragment(TypeMirror typeMirror) {
         return isSubtypeOfType(typeMirror, SUPPORT_FRAGMENT_TYPE);
+    }
+
+    private boolean isPrimitive(TypeMirror typeMirror) {
+        return typeMirror.getKind().isPrimitive();
     }
 
     private static boolean isSubtypeOfType(TypeMirror typeMirror, String otherType) {
@@ -336,10 +326,6 @@ public class DustyProcessor extends AbstractProcessor {
 
     private void error(Element element, String message, Object... args) {
         printMessage(Diagnostic.Kind.ERROR, element, message, args);
-    }
-
-    private void note(Element element, String message, Object... args) {
-        printMessage(Diagnostic.Kind.NOTE, element, message, args);
     }
 
     private void printMessage(Diagnostic.Kind kind, Element element, String message, Object[] args) {

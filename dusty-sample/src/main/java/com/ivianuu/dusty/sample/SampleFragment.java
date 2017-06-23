@@ -14,12 +14,9 @@ import com.ivianuu.dusty.annotations.Clear;
 
 public class SampleFragment extends Fragment {
 
-    @Clear
-    String myString;
-    @Clear
-    Integer myInteger;
-    @Clear
-    BaseAdapter myAdapter;
+    @Clear String myString;
+    @Clear Integer myInteger;
+    @Clear BaseAdapter myAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
