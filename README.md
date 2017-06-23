@@ -38,4 +38,4 @@ public class SampleFragment extends Fragment {
 }
 ```
 
-The values will be automatically cleared in onDestroyView.
+Dusty will clear the values in onDestroyView.
