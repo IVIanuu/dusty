@@ -2,7 +2,7 @@
 Dusty - Clean up your fragments with ease
 
 ## Introduction
-This library will automatically clear your @Clear annotated references inside fragments.+
+This library will automatically clear your @Clear annotated references inside fragments.
 
 Inspired by this class from a google sample https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/util/AutoClearedValue.java
 
