@@ -17,7 +17,7 @@ dependencies {
 
 In order to make dusty work you have to do two simple things.
 
-First annotate your references that you want to be cleared on destroy view. Note primitive types are not supported!
+First annotate your references that you want to be cleared. Note primitive types are not supported!
 Then in onCreate register the fragment by callig Dusty.register(this);
 
 ```java
