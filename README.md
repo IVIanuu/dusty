@@ -28,7 +28,7 @@ public class SampleFragment extends Fragment {
     @Clear String title;
     @Clear UpdateHelper updateHelper
     
-     @Override
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Dusty.register(this);
