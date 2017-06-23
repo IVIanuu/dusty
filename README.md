@@ -18,7 +18,8 @@ dependencies {
 In order to make dusty work you have to do two simple things.
 
 First annotate your references that you want to be cleared.
-Then in onCreate register the fragment by callig Dusty.register(this);
+
+Then in onCreate register the fragment by calling Dusty.register(this);
 
 ```java
 public class SampleFragment extends Fragment {
