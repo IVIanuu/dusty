@@ -60,7 +60,7 @@ class ClearingSet {
 
     JavaFile brewJava() {
         return JavaFile.builder(clearingClassName.packageName(), createType())
-                .addFileComment("Generated code from AutoClearedValues. Do not modify!")
+                .addFileComment("Generated code from Dustyy. Do not modify!")
                 .build();
     }
 
