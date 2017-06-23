@@ -9,7 +9,7 @@ Inspired by this class from a google sample https://github.com/googlesamples/and
 ## Download
 ```groovy
 dependencies {
-	       compile 'com.github.IVIanuu.Dusty:dusty:LATEST-VERSION'
+	 compile 'com.github.IVIanuu.Dusty:dusty:LATEST-VERSION'
          annotationProcessor 'com.github.IVIanuu.Dusty:dusty-processor:LATEST-VERSION'
 }
 ```
