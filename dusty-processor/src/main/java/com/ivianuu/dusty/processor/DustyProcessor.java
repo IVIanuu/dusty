@@ -161,7 +161,7 @@ public class DustyProcessor extends AbstractProcessor {
 
         // Start by verifying common generated code restrictions.
         if (isInaccessibleViaGeneratedCode(Clear.class, "fields", element)) {
-            error(element, "annotated element needs to be atleast package private and cannot be static or final ");
+            error(element, "annotated element needs to be atleast package private and cannot be static or final");
             return;
         }
 
@@ -172,6 +172,12 @@ public class DustyProcessor extends AbstractProcessor {
 
         if (isPrimitive(element.asType())) {
             error(element, "annotated element cannot be a primitive type");
+            return;
+        }
+
+        if (isFinal(element)) {
+            error(element, "element cannot be final");
+            return;
         }
 
         // Assemble information on the field.
@@ -253,31 +259,16 @@ public class DustyProcessor extends AbstractProcessor {
         return hasError;
     }
 
-    private boolean isInWrongPackage(Class<? extends Annotation> annotationClass,
-                                     Element element) {
-        TypeElement enclosingElement = (TypeElement) element.getEnclosingElement();
-        String qualifiedName = enclosingElement.getQualifiedName().toString();
-
-        if (qualifiedName.startsWith("android.")) {
-            error(element, "@%s-annotated class incorrectly in Android framework package. (%s)",
-                    annotationClass.getSimpleName(), qualifiedName);
-            return true;
-        }
-        if (qualifiedName.startsWith("java.")) {
-            error(element, "@%s-annotated class incorrectly in Java framework package. (%s)",
-                    annotationClass.getSimpleName(), qualifiedName);
-            return true;
-        }
-
-        return false;
-    }
-
     private boolean isSupportFragment(TypeMirror typeMirror) {
         return isSubtypeOfType(typeMirror, SUPPORT_FRAGMENT_TYPE);
     }
 
     private boolean isPrimitive(TypeMirror typeMirror) {
         return typeMirror.getKind().isPrimitive();
+    }
+
+    private boolean isFinal(Element element) {
+        return element.getModifiers().contains(Modifier.FINAL);
     }
 
     private static boolean isSubtypeOfType(TypeMirror typeMirror, String otherType) {
