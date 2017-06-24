@@ -36,7 +36,7 @@ public class Dusty {
     private static final Map<Class<?>, Constructor> CLEARINGS = new LinkedHashMap<>();
 
     /**
-     * Registers the fragment and clears all values in on destroy view
+     * Registers the fragment and clears all annotated values in on destroy view
      */
     public static void register(final Fragment target) {
         final Constructor constructor = findClearingConstructorForClass(target.getClass());
