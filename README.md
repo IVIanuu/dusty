@@ -51,6 +51,7 @@ public class SampleFragment extends Fragment {
 
 Dusty will clear the values in onDestroyView.
 
+Alternatively you can call Dusty.dust() when ever you want to clear the values
 
 ## License
 
