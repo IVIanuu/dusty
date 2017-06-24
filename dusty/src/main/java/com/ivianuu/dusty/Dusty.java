@@ -20,6 +20,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.util.TimeUtils;
 import android.util.Log;
 
 import java.lang.reflect.Constructor;
@@ -34,6 +35,9 @@ public class Dusty {
 
     private static final Map<Class<?>, Constructor> CLEARINGS = new LinkedHashMap<>();
 
+    /**
+     * Registers the fragment and clears all values in on destroy view
+     */
     public static void register(final Fragment target) {
         final Constructor constructor = findClearingConstructorForClass(target.getClass());
         if (constructor != null) {
@@ -45,18 +49,28 @@ public class Dusty {
                         public void onFragmentViewDestroyed(FragmentManager fm, Fragment f) {
                             // check target
                             if (f == target) {
-                                try {
-                                    // clear target
-                                    constructor.newInstance(target);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+                                dust(target);
 
                                 // unregister lifecycle callback
                                 fragmentManager.unregisterFragmentLifecycleCallbacks(this);
                             }
                         }
                     }, false);
+        }
+    }
+
+    /**
+     * Clears all annotated values
+     */
+    public static void dust(final Fragment target) {
+        final Constructor constructor = findClearingConstructorForClass(target.getClass());
+        if (constructor != null) {
+            try {
+                // clear target
+                constructor.newInstance(target);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
