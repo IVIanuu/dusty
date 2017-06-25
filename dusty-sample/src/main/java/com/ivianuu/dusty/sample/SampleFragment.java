@@ -16,13 +16,14 @@ import com.ivianuu.dusty.annotations.Clear;
 
 public class SampleFragment extends Fragment {
 
-    @Clear SQLiteOpenHelper sqLiteOpenHelper; // auto cleared value
-    @Clear NotificationManagerCompat notificationManagerCompat; // auto cleared value
-    @Clear BaseAdapter myAdapter; // auto cleared value
+    @Clear SQLiteOpenHelper sqLiteOpenHelper;
+    @Clear NotificationManagerCompat notificationManagerCompat;
+    @Clear BaseAdapter myAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Dusty.register(this); // register this fragment
+        Dusty.dust(this);
     }
 }

@@ -16,11 +16,10 @@
 
 package com.ivianuu.dusty;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.util.TimeUtils;
 import android.util.Log;
 
 import java.lang.reflect.Constructor;
@@ -28,48 +27,64 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @author Manuel Wrage (IVIanuu)
+ *  Instantiates auto clearing classes to clear annotated values
  */
-
 public class Dusty {
 
+    private static final String TAG = "Dusty";
+
     private static final Map<Class<?>, Constructor> CLEARINGS = new LinkedHashMap<>();
+    private static boolean debug = false;
+
+    /**
+     * Sets debugging
+     */
+    public static void setDebug(boolean debug) {
+        Dusty.debug = debug;
+    }
 
     /**
      * Registers the fragment and clears all annotated values in on destroy view
      */
-    public static void register(final Fragment target) {
-        final Constructor constructor = findClearingConstructorForClass(target.getClass());
-        if (constructor != null) {
-            final FragmentManager fragmentManager = target.getFragmentManager();
-
-            fragmentManager.registerFragmentLifecycleCallbacks(
-                    new FragmentManager.FragmentLifecycleCallbacks() {
-                        @Override
-                        public void onFragmentViewDestroyed(FragmentManager fm, Fragment f) {
-                            // check target
-                            if (f == target) {
-                                dust(target);
-
-                                // unregister lifecycle callback
-                                fragmentManager.unregisterFragmentLifecycleCallbacks(this);
-                            }
-                        }
-                    }, false);
+    public static void register(@NonNull final Fragment target) {
+        if (debug) {
+            Log.d(TAG, "registering " + target.getClass().getSimpleName());
         }
+
+        final FragmentManager fragmentManager = target.getFragmentManager();
+
+        fragmentManager.registerFragmentLifecycleCallbacks(
+                new FragmentManager.FragmentLifecycleCallbacks() {
+                    @Override
+                    public void onFragmentViewDestroyed(FragmentManager fm, Fragment f) {
+                        // check target
+                        if (f == target) {
+                            dust(target);
+
+                            // unregister lifecycle callback
+                            fragmentManager.unregisterFragmentLifecycleCallbacks(this);
+                        }
+                    }
+                }, false);
     }
 
     /**
      * Clears all annotated values
      */
-    public static void dust(final Fragment target) {
+    public static void dust(@NonNull Fragment target) {
         final Constructor constructor = findClearingConstructorForClass(target.getClass());
         if (constructor != null) {
             try {
                 // clear target
                 constructor.newInstance(target);
+                if (debug) {
+                    Log.d(TAG, "clearing " + target.getClass().getSimpleName());
+                }
             } catch (Exception e) {
                 e.printStackTrace();
+                if (debug) {
+                    Log.e(TAG, "Failed to clear " + target.getClass().getSimpleName());
+                }
             }
         }
     }

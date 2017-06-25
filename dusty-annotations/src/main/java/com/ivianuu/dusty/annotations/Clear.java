@@ -22,7 +22,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotated element will be cleared in on destroy view
+ * Annotated element will be cleared on dust
  */
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)

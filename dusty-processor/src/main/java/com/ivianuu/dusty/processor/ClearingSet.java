@@ -49,8 +49,11 @@ class ClearingSet {
 
     private ClearingSet parentClearingSet;
 
-    private ClearingSet(TypeName targetTypeName, ClassName clearingClassName, boolean isFinal
-            ,List<FieldClearing> fieldClearings, ClearingSet parentClearingSet) {
+    private ClearingSet(TypeName targetTypeName,
+                        ClassName clearingClassName,
+                        boolean isFinal,
+                        List<FieldClearing> fieldClearings,
+                        ClearingSet parentClearingSet) {
         this.targetTypeName = targetTypeName;
         this.clearingClassName = clearingClassName;
         this.isFinal = isFinal;
@@ -84,7 +87,6 @@ class ClearingSet {
         // if we have a parent we have to add super
         if (parentClearingSet != null) {
             constructorBuilder.addStatement("super(target)");
-
         }
 
         // add code to clear all fields
@@ -133,7 +135,7 @@ class ClearingSet {
         void addFieldClearing(FieldClearing fieldClearing) {
             fieldClearings.add(fieldClearing);
         }
-
+        
         void setParent(ClearingSet parentClearingSet) {
             this.parentClearingSet = parentClearingSet;
         }
