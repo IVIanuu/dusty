@@ -69,17 +69,8 @@ public class DustyProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> types = new LinkedHashSet<>();
-        for (Class<? extends Annotation> annotation : getSupportedAnnotations()) {
-            types.add(annotation.getCanonicalName());
-        }
-
+        types.add(Clear.class.getCanonicalName());
         return types;
-    }
-
-    private Set<Class<? extends Annotation>> getSupportedAnnotations() {
-        Set<Class<? extends Annotation>> annotations = new LinkedHashSet<>();
-        annotations.add(Clear.class);
-        return annotations;
     }
 
     @Override
