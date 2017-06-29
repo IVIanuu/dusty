@@ -16,6 +16,7 @@
 
 package com.ivianuu.dusty.processor;
 
+import com.google.common.collect.ImmutableList;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
@@ -38,21 +39,21 @@ import static javax.lang.model.element.Modifier.PUBLIC;
  * @author Manuel Wrage (IVIanuu)
  */
 
-class ClearingSet {
+final class ClearingSet {
 
     private TypeName targetTypeName;
     private ClassName clearingClassName;
 
     private boolean isFinal;
 
-    private List<FieldClearing> fieldClearings;
+    private ImmutableList<FieldClearing> fieldClearings;
 
     private ClearingSet parentClearingSet;
 
     private ClearingSet(TypeName targetTypeName,
                         ClassName clearingClassName,
                         boolean isFinal,
-                        List<FieldClearing> fieldClearings,
+                        ImmutableList<FieldClearing> fieldClearings,
                         ClearingSet parentClearingSet) {
         this.targetTypeName = targetTypeName;
         this.clearingClassName = clearingClassName;
@@ -63,7 +64,7 @@ class ClearingSet {
 
     JavaFile brewJava() {
         return JavaFile.builder(clearingClassName.packageName(), createType())
-                .addFileComment("Generated code from Dusty. Do not modify!")
+                .addFileComment("Generated code. Do not modify!")
                 .build();
     }
 
@@ -91,7 +92,7 @@ class ClearingSet {
 
         // add code to clear all fields
         for (FieldClearing fieldClearing : fieldClearings) {
-            constructorBuilder.addStatement("target." + fieldClearing.getName() + " = null");
+            constructorBuilder.addStatement("target.$L = null", fieldClearing.getName());
         }
 
         result.addMethod(constructorBuilder.build());
@@ -110,13 +111,13 @@ class ClearingSet {
         String packageName = getPackage(enclosingElement).getQualifiedName().toString();
         String className = enclosingElement.getQualifiedName().toString().substring(
                 packageName.length() + 1).replace('.', '$');
-        ClassName bindingClassName = ClassName.get(packageName, className + "_AutoClearing");
+        ClassName bindingClassName = ClassName.get(packageName, className + "_Clearing");
 
         boolean isFinal = enclosingElement.getModifiers().contains(Modifier.FINAL);
         return new Builder(targetType, bindingClassName, isFinal);
     }
 
-    static class Builder {
+    static final class Builder {
 
         private final TypeName targetTypeName;
         private final ClassName bindingClassName;
@@ -142,7 +143,7 @@ class ClearingSet {
 
         ClearingSet build() {
             return new ClearingSet(targetTypeName, bindingClassName, isFinal,
-                    fieldClearings, parentClearingSet);
+                    ImmutableList.copyOf(fieldClearings), parentClearingSet);
         }
     }
 }

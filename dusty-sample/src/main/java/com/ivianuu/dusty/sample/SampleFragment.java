@@ -24,6 +24,5 @@ public class SampleFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Dusty.register(this); // register this fragment
-        Dusty.dust(this);
     }
 }

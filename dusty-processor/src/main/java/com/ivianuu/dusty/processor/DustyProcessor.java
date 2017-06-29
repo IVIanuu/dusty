@@ -54,7 +54,7 @@ import static javax.lang.model.element.Modifier.STATIC;
  * @author Manuel Wrage (IVIanuu)
  */
 @AutoService(Processor.class)
-public class DustyProcessor extends AbstractProcessor {
+public final class DustyProcessor extends AbstractProcessor {
 
     private static final String SUPPORT_FRAGMENT_TYPE = "android.support.v4.app.Fragment";
 
