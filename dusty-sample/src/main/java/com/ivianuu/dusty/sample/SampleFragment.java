@@ -13,7 +13,6 @@ import com.ivianuu.dusty.annotations.Clear;
 /**
  * @author Manuel Wrage (IVIanuu)
  */
-
 public class SampleFragment extends Fragment {
 
     @Clear SQLiteOpenHelper sqLiteOpenHelper;

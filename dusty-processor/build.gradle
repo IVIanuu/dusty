@@ -8,10 +8,10 @@ dependencies {
     compile project(':dusty-annotations')
 
     // Auto service
-    compileOnly 'com.google.auto.service:auto-service:1.0-rc2'
+    compileOnly 'com.google.auto.service:auto-service:1.0-rc3'
 
     // Auto common
-    compile 'com.google.auto:auto-common:0.6'
+    compile 'com.google.auto:auto-common:0.8'
 
     // Java poet
     compile 'com.squareup:javapoet:1.9.0'
