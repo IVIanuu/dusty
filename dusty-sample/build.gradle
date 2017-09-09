@@ -13,12 +13,17 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     // Dusty
-    compile project(':dusty')
+    implementation project(':dusty')
     annotationProcessor project(':dusty-processor')
 
-    compile 'com.android.support:appcompat-v7:26.0.2'
+    implementation 'com.android.support:appcompat-v7:26.0.2'
 }
