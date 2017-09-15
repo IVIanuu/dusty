@@ -1,10 +1,8 @@
 # Dusty
-Dusty - Clean up your fragments with ease
+Dusty - Clean up your classes with ease
 
 ## Introduction
-This library will automatically clear your @Clear annotated references inside fragments.
-
-Inspired by this class from a google sample https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/util/AutoClearedValue.java
+This library will automatically clear your @Clear annotated references inside classes.
 
 ## Download
 ```groovy
@@ -33,25 +31,20 @@ First annotate your references that you want to be cleared.
 Then in onCreate register the fragment by calling Dusty.register(this);
 
 ```java
-public class SampleFragment extends Fragment {
+public class MyClass {
 
     @Clear SampleAdapter sampleAdapter;
     @Clear String title;
     @Clear UpdateHelper updateHelper
     
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Dusty.register(this);
-    }
+   
+   public void release() {
+        Dusty.dust(this); // sets the annotated fields to null
+   }
     
     ...
 }
 ```
-
-Dusty will clear the values in onDestroyView.
-
-Alternatively you can call Dusty.dust() when ever you want to clear the values
 
 ## License
 
