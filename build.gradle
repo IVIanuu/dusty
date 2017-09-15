@@ -1,16 +1,37 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
+
+    ext {
+        androidPlugin = 'com.android.tools.build:gradle:3.0.0-beta5'
+        minSdkVersion = 14
+        compileSdkVersion = 26
+        targetSdkVersion = 26
+        buildToolsVersion = '26.0.1'
+
+        kotlinVersion = '1.1.4-3'
+        kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+
+        mavenPlugin = 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+
+        supportVersion = '26.1.0'
+        supportAnnotations = "com.android.support:support-annotations:$supportVersion"
+        supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
+
+        autoCommon = 'com.google.auto:auto-common:0.8'
+
+        autoService = 'com.google.auto.service:auto-service:1.0-rc3'
+
+        javaPoet = 'com.squareup:javapoet:1.9.0'
+    }
+
     repositories {
         jcenter()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta5'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath rootProject.ext.androidPlugin
+        classpath rootProject.ext.mavenPlugin
+        classpath rootProject.ext.kotlinPlugin
     }
 }
 

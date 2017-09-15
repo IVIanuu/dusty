@@ -51,12 +51,10 @@ import static javax.lang.model.element.Modifier.PRIVATE;
 import static javax.lang.model.element.Modifier.STATIC;
 
 /**
- * @author Manuel Wrage (IVIanuu)
+ * Dusty processor
  */
 @AutoService(Processor.class)
 public final class DustyProcessor extends AbstractProcessor {
-
-    private static final String SUPPORT_FRAGMENT_TYPE = "android.support.v4.app.Fragment";
 
     private Filer filer;
 
@@ -151,11 +149,6 @@ public final class DustyProcessor extends AbstractProcessor {
             return;
         }
 
-        if (!isSupportFragment(enclosingElement.asType())) {
-            error(element, "annotated element needs to be inside a support fragment");
-            return;
-        }
-
         if (isPrimitive(element.asType())) {
             error(element, "annotated element cannot be a primitive type");
             return;
@@ -245,61 +238,12 @@ public final class DustyProcessor extends AbstractProcessor {
         return hasError;
     }
 
-    private boolean isSupportFragment(TypeMirror typeMirror) {
-        return isSubtypeOfType(typeMirror, SUPPORT_FRAGMENT_TYPE);
-    }
-
     private boolean isPrimitive(TypeMirror typeMirror) {
         return typeMirror.getKind().isPrimitive();
     }
 
     private boolean isFinal(Element element) {
         return element.getModifiers().contains(Modifier.FINAL);
-    }
-
-    private static boolean isSubtypeOfType(TypeMirror typeMirror, String otherType) {
-        if (isTypeEqual(typeMirror, otherType)) {
-            return true;
-        }
-        if (typeMirror.getKind() != TypeKind.DECLARED) {
-            return false;
-        }
-        DeclaredType declaredType = (DeclaredType) typeMirror;
-        List<? extends TypeMirror> typeArguments = declaredType.getTypeArguments();
-        if (typeArguments.size() > 0) {
-            StringBuilder typeString = new StringBuilder(declaredType.asElement().toString());
-            typeString.append('<');
-            for (int i = 0; i < typeArguments.size(); i++) {
-                if (i > 0) {
-                    typeString.append(',');
-                }
-                typeString.append('?');
-            }
-            typeString.append('>');
-            if (typeString.toString().equals(otherType)) {
-                return true;
-            }
-        }
-        Element element = declaredType.asElement();
-        if (!(element instanceof TypeElement)) {
-            return false;
-        }
-        TypeElement typeElement = (TypeElement) element;
-        TypeMirror superType = typeElement.getSuperclass();
-        if (isSubtypeOfType(superType, otherType)) {
-            return true;
-        }
-
-        for (TypeMirror interfaceType : typeElement.getInterfaces()) {
-            if (isSubtypeOfType(interfaceType, otherType)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean isTypeEqual(TypeMirror typeMirror, String otherType) {
-        return otherType.equals(typeMirror.toString());
     }
 
     private void error(Element element, String message, Object... args) {

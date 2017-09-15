@@ -18,8 +18,6 @@ package com.ivianuu.dusty;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
 import java.lang.reflect.Constructor;
@@ -29,7 +27,7 @@ import java.util.Map;
 /**
  *  Instantiates auto clearing classes to clear annotated values
  */
-public class Dusty {
+public final class Dusty {
 
     private static final String TAG = "Dusty";
 
@@ -44,34 +42,9 @@ public class Dusty {
     }
 
     /**
-     * Registers the fragment and clears all annotated values in on destroy view
+     * Clears all annotated fields
      */
-    public static void register(@NonNull final Fragment target) {
-        if (debug) {
-            Log.d(TAG, "registering " + target.getClass().getSimpleName());
-        }
-
-        final FragmentManager fragmentManager = target.getFragmentManager();
-
-        fragmentManager.registerFragmentLifecycleCallbacks(
-                new FragmentManager.FragmentLifecycleCallbacks() {
-                    @Override
-                    public void onFragmentViewDestroyed(FragmentManager fm, Fragment f) {
-                        // check target
-                        if (f == target) {
-                            dust(target);
-
-                            // unregister lifecycle callback
-                            fragmentManager.unregisterFragmentLifecycleCallbacks(this);
-                        }
-                    }
-                }, false);
-    }
-
-    /**
-     * Clears all annotated values
-     */
-    public static void dust(@NonNull Fragment target) {
+    public static void dust(@NonNull Object target) {
         final Constructor constructor = findClearingConstructorForClass(target.getClass());
         if (constructor != null) {
             try {

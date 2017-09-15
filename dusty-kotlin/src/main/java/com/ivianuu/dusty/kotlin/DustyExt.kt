@@ -14,21 +14,13 @@
  * limitations under the License.
  */
 
-package com.ivianuu.dusty.processor;
+package com.ivianuu.dusty.kotlin
+
+import com.ivianuu.dusty.Dusty
 
 /**
- * Field clearing
+ * Clears all annotated fields
  */
-final class FieldClearing {
-
-    private final String name;
-
-    FieldClearing(String name) {
-        this.name = name;
-    }
-
-    String getName() {
-        return name;
-    }
-
+fun Any.dust() {
+    Dusty.dust(this)
 }

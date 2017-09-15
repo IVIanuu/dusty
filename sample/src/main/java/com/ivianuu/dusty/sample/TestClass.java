@@ -14,21 +14,14 @@
  * limitations under the License.
  */
 
-package com.ivianuu.dusty.processor;
+package com.ivianuu.dusty.sample;
+
+import com.ivianuu.dusty.annotations.Clear;
 
 /**
- * Field clearing
+ * @author Manuel Wrage (IVIanuu)
  */
-final class FieldClearing {
-
-    private final String name;
-
-    FieldClearing(String name) {
-        this.name = name;
-    }
-
-    String getName() {
-        return name;
-    }
-
+public class TestClass {
+    @Clear String userName;
+    @Clear Boolean isPrimitive;
 }

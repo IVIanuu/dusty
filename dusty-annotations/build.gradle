@@ -3,9 +3,5 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.ivianuu'
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-}
-
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"

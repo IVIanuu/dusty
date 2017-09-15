@@ -36,9 +36,8 @@ import static javax.lang.model.element.Modifier.FINAL;
 import static javax.lang.model.element.Modifier.PUBLIC;
 
 /**
- * @author Manuel Wrage (IVIanuu)
+ * Clearing set
  */
-
 final class ClearingSet {
 
     private TypeName targetTypeName;
