@@ -20,6 +20,6 @@ public class SampleFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        Dusty.dust(this); // or manually clear
+        Dusty.dust(this);
     }
 }

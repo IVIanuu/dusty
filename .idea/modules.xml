@@ -5,9 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/Dusty.iml" filepath="$PROJECT_DIR$/Dusty.iml" />
       <module fileurl="file://$PROJECT_DIR$/dusty/dusty.iml" filepath="$PROJECT_DIR$/dusty/dusty.iml" />
       <module fileurl="file://$PROJECT_DIR$/dusty-annotations/dusty-annotations.iml" filepath="$PROJECT_DIR$/dusty-annotations/dusty-annotations.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dusty-kotlin/dusty-kotlin.iml" filepath="$PROJECT_DIR$/dusty-kotlin/dusty-kotlin.iml" />
       <module fileurl="file://$PROJECT_DIR$/dusty-processor/dusty-processor.iml" filepath="$PROJECT_DIR$/dusty-processor/dusty-processor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample/dusty-sample.iml" filepath="$PROJECT_DIR$/sample/dusty-sample.iml" />
+      <module fileurl="file://C:\Users\IVIanuu\AndroidStudioProjects\Dusty\sample\dusty-sample.iml" filepath="C:\Users\IVIanuu\AndroidStudioProjects\Dusty\sample\dusty-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
     </modules>
   </component>
 </project>

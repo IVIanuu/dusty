@@ -10,7 +10,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/dusty" />
             <option value="$PROJECT_DIR$/dusty-annotations" />
-            <option value="$PROJECT_DIR$/dusty-kotlin" />
             <option value="$PROJECT_DIR$/dusty-processor" />
             <option value="$PROJECT_DIR$/sample" />
           </set>

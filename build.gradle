@@ -1,19 +1,14 @@
 buildscript {
 
     ext {
-        androidPlugin = 'com.android.tools.build:gradle:3.0.0-beta5'
+        androidPlugin = 'com.android.tools.build:gradle:3.0.1'
         minSdkVersion = 14
-        compileSdkVersion = 26
-        targetSdkVersion = 26
-        buildToolsVersion = '26.0.1'
-
-        kotlinVersion = '1.1.4-3'
-        kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+        compileSdkVersion = 27
+        targetSdkVersion = 27
 
         mavenPlugin = 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
-        supportVersion = '26.1.0'
+        supportVersion = '27.0.1'
         supportAnnotations = "com.android.support:support-annotations:$supportVersion"
         supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
 
@@ -31,7 +26,6 @@ buildscript {
     dependencies {
         classpath rootProject.ext.androidPlugin
         classpath rootProject.ext.mavenPlugin
-        classpath rootProject.ext.kotlinPlugin
     }
 }
 
